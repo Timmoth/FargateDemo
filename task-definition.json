@@ -1,30 +1,82 @@
 {
-    "family": "sample-fargate", 
-    "networkMode": "awsvpc", 
+    "taskDefinitionArn": "arn:aws:ecs:eu-west-2:762357690573:task-definition/sample-fargate:1",
     "containerDefinitions": [
         {
-            "name": "fargate-app", 
-            "image": "httpd:2.4", 
+            "name": "test",
+            "image": "762357690573.dkr.ecr.eu-west-2.amazonaws.com/timmoth:28e42343f4dbd9492a5623996d52a96cde89ed4d",
+            "cpu": 0,
             "portMappings": [
                 {
-                    "containerPort": 80, 
-                    "hostPort": 80, 
-                    "protocol": "tcp"
+                    "name": "test-80-tcp",
+                    "containerPort": 80,
+                    "hostPort": 80,
+                    "protocol": "tcp",
+                    "appProtocol": "http"
                 }
-            ], 
-            "essential": true, 
-            "entryPoint": [
-                "sh",
-		"-c"
-            ], 
-            "command": [
-                "/bin/sh -c \"echo '<html> <head> <title>Amazon ECS Sample App</title> <style>body {margin-top: 40px; background-color: #333;} </style> </head><body> <div style=color:white;text-align:center> <h1>Amazon ECS Sample App</h1> <h2>Congratulations!</h2> <p>Your application is now running on a container in Amazon ECS.</p> </div></body></html>' >  /usr/local/apache2/htdocs/index.html && httpd-foreground\""
-            ]
+            ],
+            "essential": true,
+            "environment": [],
+            "environmentFiles": [],
+            "mountPoints": [],
+            "volumesFrom": [],
+            "logConfiguration": {
+                "logDriver": "awslogs",
+                "options": {
+                    "awslogs-create-group": "true",
+                    "awslogs-group": "/ecs/sample-fargate",
+                    "awslogs-region": "eu-west-2",
+                    "awslogs-stream-prefix": "ecs"
+                }
+            }
         }
-    ], 
+    ],
+    "family": "sample-fargate",
+    "executionRoleArn": "arn:aws:iam::762357690573:role/ecsTaskExecutionRole",
+    "networkMode": "awsvpc",
+    "revision": 1,
+    "volumes": [],
+    "status": "ACTIVE",
+    "requiresAttributes": [
+        {
+            "name": "com.amazonaws.ecs.capability.logging-driver.awslogs"
+        },
+        {
+            "name": "ecs.capability.execution-role-awslogs"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.ecr-auth"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.19"
+        },
+        {
+            "name": "ecs.capability.execution-role-ecr-pull"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.18"
+        },
+        {
+            "name": "ecs.capability.task-eni"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.29"
+        }
+    ],
+    "placementConstraints": [],
+    "compatibilities": [
+        "EC2",
+        "FARGATE"
+    ],
     "requiresCompatibilities": [
         "FARGATE"
-    ], 
-    "cpu": "256", 
-    "memory": "512"
+    ],
+    "cpu": "256",
+    "memory": "512",
+    "runtimePlatform": {
+        "cpuArchitecture": "X86_64",
+        "operatingSystemFamily": "LINUX"
+    },
+    "registeredAt": "2023-02-19T22:49:34.916Z",
+    "registeredBy": "arn:aws:iam::762357690573:root",
+    "tags": []
 }
